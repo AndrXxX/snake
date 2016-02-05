@@ -13,15 +13,10 @@ namespace Snake
         {
             //Console.SetBufferSize(90, 26);
 
-            // отрисовка рамочки
-            HorisontalLine upLine = new HorisontalLine(0, 78, 0, '+');
-            HorisontalLine downLine = new HorisontalLine(0, 78, 24, '+');
-            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
-            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
-            upLine.Draw();
-            downLine.Draw();
-            leftLine.Draw();
-            rightLine.Draw();
+            Walls walls = new Walls(80, 25);
+            walls.Draw();
+
+
 
             //отрисовка точек
             Point p = new Point(4,5, '*');
@@ -34,6 +29,10 @@ namespace Snake
 
             while (true)
             {
+                if (walls.IsHit(snake) || snake.IsHitTail())
+                {
+                    break;
+                }        
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
